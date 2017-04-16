@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="intern.tfi.org.prework.AdminActivity">
+    <TextView
+        android:id="@+id/admin_display_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Staff/Fellow User"
+        android:textSize="30dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+    <EditText
+        android:id="@+id/admin_create_user_name_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name of the user"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textSize="25dp"
+        android:layout_below="@+id/admin_display_text_view"/>
+
+    <EditText
+        android:id="@+id/admin_create_user_email_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email of the user"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textSize="25dp"
+        android:layout_below="@+id/admin_create_user_name_edit_text"/>
+    <EditText
+        android:id="@+id/admin_create_user_mobile_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile number of the user"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textSize="25dp"
+        android:layout_below="@+id/admin_create_user_email_edit_text"/>
+
+    <Button
+        android:id="@+id/admin_create_user_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create User"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/admin_create_user_mobile_edit_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/admin_logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/admin_create_user_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"/>
+
+</RelativeLayout>

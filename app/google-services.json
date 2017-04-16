@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "621034563326",
+    "firebase_url": "https://tfiprework.firebaseio.com",
+    "project_id": "tfiprework",
+    "storage_bucket": "tfiprework.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621034563326:android:f052e22a9a1d9649",
+        "android_client_info": {
+          "package_name": "intern.tfi.org.prework"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621034563326-sf969rurc83bokq1iforqv1al8ormmot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "intern.tfi.org.prework",
+            "certificate_hash": "9c6c86a4ab6cf2c76ab78fed53ba3323a624cb5d"
+          }
+        },
+        {
+          "client_id": "621034563326-dt1gql3vvcrr4dh6hs6q1p4jhfqdusu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYqZ6TVbQYqRoD763bq2Kw6uZY7PVBX1A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621034563326-dt1gql3vvcrr4dh6hs6q1p4jhfqdusu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

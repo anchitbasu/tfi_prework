@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="intern.tfi.org.prework.UserSignUpActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/signup_background_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+    <ImageView
+        android:id="@+id/signup_tfi_text_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="165dp"
+        />
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="150pt"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="#000000"
+        android:alpha="0.8">
+
+        <EditText
+            android:id="@+id/signup_name_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="Name"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffffff"/>
+        <EditText
+            android:id="@+id/signup_mobile_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:inputType="phone"
+            android:hint="Mobile Number"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffffff"/>
+        <EditText
+            android:id="@+id/signup_email_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:hint="Email Id"
+            android:layout_marginTop="10dp"
+            android:inputType="textEmailAddress"
+            android:textColor="#ffffff"/>
+
+        <EditText
+            android:id="@+id/signup_password_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:textColor="#ffffff"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/signup_conf_password_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            android:textColor="#ffffff"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/signup_button"
+            android:layout_marginTop="20dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:text="Sign Up"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:background="#5555"/>
+    </LinearLayout>
+
+</RelativeLayout>

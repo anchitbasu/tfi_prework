@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/vol_opp_signup_why_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Why Do You Want To Volunteer In This Position?(in 200 characters)"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:maxLength="200"/>
+
+    <EditText
+        android:id="@+id/vol_opp_signup_prev_experience_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Please Share Any Prior Volunteering Experience?(if any)(in 200 characters)"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:maxLength="200"/>
+
+    <EditText
+        android:id="@+id/vol_opp_signup_commit_time_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Please Mention The No. Of Hours You Can \n Commit Per Day"
+        android:inputType="number"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:maxLength="2"/>
+
+    <Button
+        android:id="@+id/vol_opp_signup_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SignUp For Opportunity"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
