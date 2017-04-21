@@ -87,7 +87,7 @@ public class ViewOppFellowFragment extends Fragment {
 
             }
         });
-
+        Log.i("test","2 oncreateview");
         return view;
     }
 
@@ -95,12 +95,14 @@ public class ViewOppFellowFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Log.i("test","2 onstart");
         mRecyclerView.removeAllViewsInLayout();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        Log.i("test","2 onresume");
         mRecyclerView.removeAllViewsInLayout();
     }
 }

@@ -48,6 +48,9 @@ public class ViewOwnOppFragment extends Fragment {
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(recyclerAdapter);
 
+        volunteeringOpportunitiesArrayList.clear();
+        recyclerAdapter.notifyDataSetChanged();
+
         myRefVolOpp.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -91,7 +94,26 @@ public class ViewOwnOppFragment extends Fragment {
             }
         });
 
-
+        Log.i("test","3 oncreate");
         return view;
+    }
+
+    @Override
+    public boolean getUserVisibleHint() {
+        return super.getUserVisibleHint();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mRecyclerView.removeAllViewsInLayout();
+        Log.i("test","3 onstart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRecyclerView.removeAllViewsInLayout();
+        Log.i("test","3 onresume");
     }
 }

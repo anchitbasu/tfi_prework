@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.support.v7.widget.AppCompatSpinner;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class CreateOppFragment extends Fragment {
 
                 userid=sharedpreferences.getString(getString(R.string.sp_userid),"");
 
-                if(title.equals("") || city.equals("") || area.equals("") || email.equals("") || start.equals("") || end.equals("") || time.equals("") || description.equals("") || days.equals("") || type.equals("")){
+                if(title.equals("") || city.equals("") || area.equals("") || email.equals("") || start.equals("") || end.equals("") || time.equals("") || Integer.parseInt(time)>24 || description.equals("") || days.equals("") || type.equals("")){
                     Toast.makeText(getActivity().getApplicationContext(), "Please Fill All The Fields", Toast.LENGTH_SHORT).show();
                 }
                 else if(Integer.parseInt(time)>12){
@@ -98,7 +99,19 @@ public class CreateOppFragment extends Fragment {
                 }
             }
         });
-
+        Log.i("test","1 onresume");
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i("test","1 onstart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("test","1 onresume");
     }
 }

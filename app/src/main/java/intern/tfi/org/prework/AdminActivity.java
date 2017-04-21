@@ -56,12 +56,11 @@ public class AdminActivity extends Activity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot dsp: dataSnapshot.getChildren()){
-                            if(dsp.child("email").getValue().toString().equals(userEmail) || dsp.child("mobile").getValue().toString().equals(userMobile)){
-                                Toast.makeText(AdminActivity.this, "User Already Exists", Toast.LENGTH_SHORT).show();
-                            }
-                            else{
                                 String password = myRefUsers.push().getKey();
                                 myRefUsers.child(password).setValue(new StaffSignUpInfo(userName,userEmail,userMobile,password,"staff"));
+
+                                SendMail1 sendMail1=new SendMail1(getApplicationContext(), userEmail, "TFI Account Information", "Welcome To TFI!\n\n\nUserId:"+userEmail+"\n\n\n\nPassword:"+password);
+                                sendMail1.execute();
 
                                 final Dialog dialog=new Dialog(AdminActivity.this);
                                 dialog.setContentView(R.layout.staff_details_dialog_layout);
@@ -86,7 +85,7 @@ public class AdminActivity extends Activity {
                                 });
 
                                 dialog.show();
-                            }
+
                         }
                     }
 

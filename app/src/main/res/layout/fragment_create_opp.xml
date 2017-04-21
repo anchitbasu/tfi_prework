@@ -98,6 +98,7 @@
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:inputType="number"
+            android:maxLength="2"
             android:hint="Time Commitment Per Day(in hours)" />
 
         <Spinner

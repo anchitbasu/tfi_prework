@@ -26,19 +26,23 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VolunteerStart extends Activity {
 
     ImageView backgroundImageView;
+    String sendEmailId,sendUid,sendName;
     FirebaseDatabase database;
-    DatabaseReference myRefVolOpp,myRefVolOppSignup;
+    DatabaseReference myRefVolOpp,myRefVolOppSignup,myRefUsers;
     RecyclerView mRecyclerView;
     RecyclerAdapter recyclerAdapter;
     LinearLayoutManager mLinearLayoutManager;
     ArrayList<VolunteeringOpportunities> volunteeringOpportunitiesArrayList =new ArrayList<>();
-    ImageButton searchCriteriaButton;
+    ImageView searchCriteriaButton;
     SharedPreferences sharedPreferences;
     String USERID,NAME,MOBILE,EMAIL,VOLOPPID;
     @Override
@@ -50,11 +54,13 @@ public class VolunteerStart extends Activity {
         database=FirebaseDatabase.getInstance();
         myRefVolOpp=database.getReference("vol_opp");
         myRefVolOppSignup=database.getReference("vol_opp_signup");
-        searchCriteriaButton=(ImageButton)findViewById(R.id.search_fab);
+        myRefUsers=database.getReference("users");
+        searchCriteriaButton=(ImageView) findViewById(R.id.search_fab);
         recyclerAdapter=new RecyclerAdapter(volunteeringOpportunitiesArrayList);
         mRecyclerView=(RecyclerView)findViewById(R.id.volunteer_recycler_view);
         mLinearLayoutManager=new LinearLayoutManager(getApplicationContext());
         sharedPreferences=getSharedPreferences(getString(R.string.shared_preference_name), Context.MODE_PRIVATE);
+
 
         USERID=sharedPreferences.getString(getString(R.string.sp_userid),"");
         MOBILE=sharedPreferences.getString(getString(R.string.sp_mobile),"");
@@ -74,7 +80,7 @@ public class VolunteerStart extends Activity {
             }
         });
 
-        SharedPreferences sharedPreferences=getSharedPreferences(getString(R.string.shared_preference_name), Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences=getSharedPreferences(getString(R.string.shared_preference_name), Context.MODE_PRIVATE);
         final int searchType=sharedPreferences.getInt("searchType",-1);
         final String searchVal=sharedPreferences.getString("searchVal","");
 
@@ -160,10 +166,49 @@ public class VolunteerStart extends Activity {
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(), mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
+                        final String title=volunteeringOpportunitiesArrayList.get(position).getTitle();
+
+
                         Toast.makeText(VolunteerStart.this, volunteeringOpportunitiesArrayList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
                         final Dialog dialog=new Dialog(VolunteerStart.this);
                         dialog.setContentView(R.layout.volunteer_opp_signup_dialog_layout);
                         dialog.setTitle("SignUp");
+
+                        myRefVolOpp.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot dsp:dataSnapshot.getChildren()){
+                                    if(dsp.child("title").getValue().equals(title)){
+                                        sendEmailId=dsp.child("emailid").getValue().toString();
+                                        sendUid=dsp.child("userid").getValue().toString();
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        myRefUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot dsp:dataSnapshot.getChildren()){
+                                    if(dsp.getKey().toString().equals(sharedPreferences.getString("senduid",""))){
+                                        sendName=dsp.child("name").getValue().toString();
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
 
                         final EditText reasonEditText=(EditText) dialog.findViewById(R.id.vol_opp_signup_why_edit_text);
                         final EditText experienceEditText=(EditText) dialog.findViewById(R.id.vol_opp_signup_prev_experience_edit_text);
@@ -175,6 +220,8 @@ public class VolunteerStart extends Activity {
                         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
                         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
 
+
+
                         volOppSignUpButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -182,9 +229,17 @@ public class VolunteerStart extends Activity {
                                 String experience=experienceEditText.getText().toString();
                                 String commitTime=commitTimeEditText.getText().toString();
 
-                                myRefVolOppSignup.child(VOLOPPID).child(USERID).setValue(new VolOppSignUpInfo(NAME,EMAIL,MOBILE,reason,experience,commitTime));
-                                Toast.makeText(VolunteerStart.this, "Successfully SignedUp", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
+                                if(reason.equals("") || experience.equals("") || commitTime.equals("") || Integer.parseInt(commitTime)>24){
+                                    Toast.makeText(VolunteerStart.this, "Invalid Input. Please Try Again", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    myRefVolOppSignup.child(VOLOPPID).child(USERID).setValue(new VolOppSignUpInfo(NAME, EMAIL, MOBILE, reason, experience, commitTime));
+                                    Toast.makeText(VolunteerStart.this, "Successfully SignedUp ", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+
+                                    SendMail1 sendMail1 = new SendMail1(getApplicationContext(), sendEmailId, "Volunteer Sign Up Information", "Hi " + sendName + "!!      " + NAME + " (" + MOBILE + ") (" + EMAIL + ") has signed for opportunity '" + title + "' created by you.      Reason:" + reason + "              Volunteering Experience:" + experience + "              Time that can be committed per day:" + commitTime);
+                                    sendMail1.execute();
+                                }
                             }
                         });
                         dialog.show();
